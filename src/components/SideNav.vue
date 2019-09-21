@@ -34,7 +34,8 @@ export default {
     return {
       items: [
         { title: "ホーム", icon: "home", link: { name: "home" } },
-        { title: "連絡先一覧", icon: "list", link: { name: "addresses" } }
+        { title: "連絡先一覧", icon: "list", link: { name: "addresses" } },
+        { title: "HelloWorld", link: { name: "hello" } } // linkにはrouter.jsのnameの値を指定
       ]
     };
   }

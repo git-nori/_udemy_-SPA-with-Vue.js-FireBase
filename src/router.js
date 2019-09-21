@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Addresses from './views/Addresses.vue'
 import Home from './views/Home.vue'
+import HelloWorld from './components/HelloWorld.vue'
 
 Vue.use(Router)
 
@@ -20,5 +21,10 @@ export default new Router({
       name: 'addresses',
       component: Addresses
     },
+    {
+      path: '/helloworld',
+      name: 'hello',
+      component: HelloWorld
+    }
   ]
 })

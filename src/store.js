@@ -17,11 +17,17 @@ export default new Vuex.Store({
     addAddress (state, address) {
       state.addresses.push(address)
     },
+    setLoginUser (state, user) {
+      state.user = user
+    }
   },
   actions: {
     login () {
       const google_auth_provider = new firebase.auth.GoogleAuthProvider() // google認証を使う際のプロバイダーを格納
       firebase.auth().signInWithRedirect(google_auth_provider)
+    },
+    setLoginUser ({ commit }, user) {
+      commit('setLoginUser', user) // ログインユーザーをstateに格納するmutationsを呼び出す
     },
     toggleSideMenu ({ commit }) {
       commit('toggleSideMenu')

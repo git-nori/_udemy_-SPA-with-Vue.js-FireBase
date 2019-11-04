@@ -1,16 +1,14 @@
 <template>
   <v-container text-xs-center justify-center>
-    <v-row>
-      <v-col xs-12>
+    <v-layout>
+      <v-flex xs-12>
         <h1>MyAddressBook</h1>
         <p>アドレス帳を利用の方はgoogleログインをしてください</p>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col xs-12 mt-5>
+      </v-flex>
+      <v-flex xs-12>
         <v-btn flat color="info" @click="login">Googleアカウントでログイン</v-btn>
-      </v-col>
-    </v-row>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 

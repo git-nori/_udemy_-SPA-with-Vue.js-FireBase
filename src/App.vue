@@ -5,6 +5,9 @@
       <v-toolbar-title class="headline text-uppercase"></v-toolbar-title>
       <span>MyAddressBook</span>
       <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <v-btn flat @click="logout">LogOut</v-btn>
+      </v-toolbar-items>
     </v-toolbar>
     <SideNav />
 
@@ -31,6 +34,8 @@ export default {
       // login => user, logout => null
       if (user) {
         this.setLoginUser(user);
+      } else {
+        this.deleteLoginUser();
       }
     });
   },
@@ -41,7 +46,12 @@ export default {
     openSideMenu() {
       this.$store.dispatch("toggleSideMenu");
     },
-    ...mapActions(["toggleSideMenu", "setLoginUser"])
+    ...mapActions([
+      "toggleSideMenu",
+      "setLoginUser",
+      "logout",
+      "deleteLoginUser"
+    ])
   }
 };
 </script>

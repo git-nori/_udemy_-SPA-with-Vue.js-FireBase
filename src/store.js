@@ -18,10 +18,10 @@ export default new Vuex.Store({
       state.addresses.push(address)
     },
     setLoginUser (state, user) {
-      state.user = user
+      state.login_user = user
     },
     deleteLoginUser (state) {
-      state.user = null
+      state.login_user = null
     }
   },
   actions: {
@@ -44,5 +44,9 @@ export default new Vuex.Store({
     addAddress ({ commit }, address) {
       commit('addAddress', address)  // mutationsのaddAddressを呼び出す
     }
+  },
+  getters: {
+    userName: state => state.login_user ? state.login_user.displayName : '',
+    photoURL: state => state.login_user ? state.login_user.photoURL : ''
   }
 })

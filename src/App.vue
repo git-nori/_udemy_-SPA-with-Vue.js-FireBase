@@ -5,7 +5,7 @@
       <v-toolbar-title class="headline text-uppercase"></v-toolbar-title>
       <span>MyAddressBook</span>
       <v-spacer></v-spacer>
-      <v-toolbar-items>
+      <v-toolbar-items v-if="$store.state.login_user">
         <v-btn flat @click="logout">LogOut</v-btn>
       </v-toolbar-items>
     </v-toolbar>

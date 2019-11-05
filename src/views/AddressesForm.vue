@@ -39,6 +39,17 @@ export default {
       this.address = {};
     },
     ...mapActions(["addAddress"])
+  },
+  created() {
+    let address_id = this.$route.params.address_id;
+    if (!address_id) return; // パスにIDが含まれているか判定
+
+    const address = this.$store.getters.getAddressById(address_id); // getterメソッドにaddress_idを引数に渡して呼び出す
+    if (address) {
+      this.address = address;
+    } else {
+      this.$router.push({ name: "addresses" });
+    }
   }
 };
 </script>   

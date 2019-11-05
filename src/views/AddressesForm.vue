@@ -34,11 +34,17 @@ export default {
   },
   methods: {
     submit() {
-      this.addAddress(this.address);
+      let address_id = this.$route.params.address_id;
+      // パスにaddress_idが存在する場合はupdate, ない場合はcreate
+      if (address_id) {
+        this.updateAddress({ id: address_id, address: this.address });
+      } else {
+        this.addAddress(this.address);
+      }
       this.$router.push({ name: "addresses" });
       this.address = {};
     },
-    ...mapActions(["addAddress"])
+    ...mapActions(["addAddress", "updateAddress"])
   },
   created() {
     let address_id = this.$route.params.address_id;

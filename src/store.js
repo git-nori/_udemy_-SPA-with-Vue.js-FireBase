@@ -23,6 +23,11 @@ export default new Vuex.Store({
     },
     deleteLoginUser (state) {
       state.login_user = null
+    },
+    updateAddress (state, { id, address }) {
+      const index = state.addresses.findIndex(address => address.id === id)
+
+      state.addresses[index] = address
     }
   },
   actions: {
@@ -54,7 +59,13 @@ export default new Vuex.Store({
         // doc.id => addressを識別するデータ, addメソッドのコールバック関数のオブジェクトからidを取得し,addAddressに引数で渡す
         commit('addAddress', { id: doc.id, address })  // mutationsのaddAddressを呼び出す
       })
-
+    },
+    updateAddress ({ getters, commit }, { id, address }) {
+      if (getters.uid) {
+        firebase.firestore().collection(`users/${getters.uid}/addresses`).doc(id).update(address).then(() => {
+          commit('updateAddress', { id, address })
+        })
+      }
     }
   },
   getters: {

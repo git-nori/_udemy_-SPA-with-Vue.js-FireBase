@@ -34,6 +34,7 @@ export default {
       // login => user, logout => null
       if (user) {
         this.setLoginUser(user);
+        this.fetchAddresses();
         if (this.$router.currentRoute.name === "home")
           // home画面にいる場合はログイン時にaddress画面へ遷移
           this.$router.push({ name: "addresses" });
@@ -54,7 +55,8 @@ export default {
       "toggleSideMenu",
       "setLoginUser",
       "logout",
-      "deleteLoginUser"
+      "deleteLoginUser",
+      "fetchAddresses"
     ])
   }
 };

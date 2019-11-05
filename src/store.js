@@ -25,6 +25,12 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    fetchAddresses ({ getters, commit }) {
+      // firestoreからデータを取得し、addAddressを呼び出す
+      firebase.firestore().collection(`users/${getters.uid}/addresses`).get().then(snapshot => {
+        snapshot.forEach(doc => commit('addAddress', doc.data()))
+      })
+    },
     login () {
       const google_auth_provider = new firebase.auth.GoogleAuthProvider() // google認証を使う際のプロバイダーを格納
       firebase.auth().signInWithRedirect(google_auth_provider)
@@ -42,11 +48,13 @@ export default new Vuex.Store({
       commit('toggleSideMenu')
     },
     addAddress ({ commit }, address) {
+      if (this.getters.uid) firebase.firestore().collection(`users/${this.getters.uid}/addresses`).add(address) // uidが存在する場合、firestoreにaddress(引数)を保存する
       commit('addAddress', address)  // mutationsのaddAddressを呼び出す
     }
   },
   getters: {
     userName: state => state.login_user ? state.login_user.displayName : '',
-    photoURL: state => state.login_user ? state.login_user.photoURL : ''
+    photoURL: state => state.login_user ? state.login_user.photoURL : '',
+    uid: state => state.login_user ? state.login_user.uid : null,
   }
 })
